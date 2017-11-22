@@ -6,8 +6,8 @@ public class BeansAmountException extends Exception {
     public BeansAmountException(double beans){
         super(String.format("%s is not the right amount of beans", beans));
     }
-    //Todo
-    public double getBeans(){ }
+
+    public double getBeans(){return beans;}
 
     protected BeansAmountException(double beans, String message){
         super(message);

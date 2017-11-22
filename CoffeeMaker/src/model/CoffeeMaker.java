@@ -1,5 +1,12 @@
 package model;
 
+import com.sun.tools.corba.se.idl.constExpr.Not;
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+import exceptions.NotEnoughBeansException;
+import exceptions.StaleCoffeeException;
+import exceptions.TooManyBeansException;
+import exceptions.WaterException;
+
 /**
  * A coffee maker used to train baristas.
  *
@@ -8,8 +15,13 @@ package model;
 
 public class CoffeeMaker {
 
+    private int timeSinceLastBrew;
+    private int beans;
+    private double water;
+    private int cups;
+
     public CoffeeMaker(){
-        // TODO: complete the implementation of this method
+
     }
 
     // getters
@@ -28,24 +40,42 @@ public class CoffeeMaker {
         return false;
     }
 
-    //REQUIRES: a non-negative integer
-    //EFFECTS: sets time since last brew
-    public void setTimeSinceLastBrew(int time) {
-        // TODO: complete the implementation of this method
+
+    public void setTimeSinceLastBrew(int time) throws Exception{
+        if (time < 0){
+            throw new Exception("Time should be non negative");
+        }
+        this.timeSinceLastBrew = time;
+
     }
 
-    //REQUIRES: beans between 2.40 and 2.60 cups, water > 14.75 cups
-    //EFFECTS: sets cups remaining to full (20 cups) and time since last brew to 0
-    public void brew(double beans, double water){
-        // TODO: complete the implementation of this method
+
+    public void brew(double beans, double water) throws NotEnoughBeansException, TooManyBeansException,
+            WaterException{
+        if (beans < 2.40) {
+            throw new NotEnoughBeansException(beans);
+        }
+        if (beans > 2.60) {
+            throw new TooManyBeansException(beans);
+        }
+        if (water <= 14.75) {
+            throw new WaterException(water);
+        }
+        cups = 20;
+        timeSinceLastBrew = 0;
     }
 
-    ///REQUIRES: cups remaining > 0, time since last brew < 60
-    //MODIFIES: this
-    //EFFECTS: subtracts one cup from cups remaining
-    public void pourCoffee() {
-        // TODO: complete the implementation of this method
+
+    public void pourCoffee() throws StaleCoffeeException, Exception {
+        if (cups <= 0){
+            throw new Exception("No more cups left!");
+        }
+        if (timeSinceLastBrew > 60 ) {
+            throw new StaleCoffeeException(timeSinceLastBrew);
+        }
+        cups -= 1;
     }
 
 
 }
+
