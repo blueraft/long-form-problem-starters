@@ -26,18 +26,16 @@ public class CoffeeMaker {
 
     // getters
     public int getTimeSinceLastBrew() {
-        // TODO: complete the implementation of this method
-        return 0;
+        return timeSinceLastBrew;
     }
+
     public int getCupsRemaining() {
-        // TODO: complete the implementation of this method
-        return 0;
+        return cups;
     }
 
     // EFFECTS: return true if there are coffee cups remaining
     public boolean areCupsRemaining() {
-        // TODO: complete the implementation of this method
-        return false;
+        return (cups > 0);
     }
 
 
