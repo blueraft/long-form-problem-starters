@@ -20,8 +20,10 @@ public class CoffeeMaker {
     private double water;
     private int cups;
 
+    //EFFECTS: sets time since last brew, cups remaining to 0
     public CoffeeMaker(){
-
+        timeSinceLastBrew = 0;
+        cups = 0;
     }
 
     // getters

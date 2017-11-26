@@ -1,11 +1,16 @@
 package model;
 
+import com.sun.tools.javac.util.List;
 import model.pets.Pet;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class Human {
     private String name;
     private double spendibees;
+    private ArrayList<Pet> pets;
 
     public Human(String name) {
         this.name = name;

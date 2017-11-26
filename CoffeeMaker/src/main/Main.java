@@ -1,33 +1,59 @@
 package main;
 
-import exceptions.NotEnoughBeansException;
-import exceptions.StaleCoffeeException;
-import exceptions.TooManyBeansException;
-import exceptions.WaterException;
+import exceptions.*;
 import model.CoffeeMaker;
 
 public class Main {
 
     public static void main(String[] args) {
-        CoffeeMaker c = new CoffeeMaker();
+
+        CoffeeMaker cm = new CoffeeMaker();
         try {
-            c.brew(2.3,15);
-        } catch (NotEnoughBeansException e) {
-            System.out.println("Too few beans, try adding more than 2.4 and less than 2.6");
-        } catch (TooManyBeansException e) {
-            System.out.println("Too many beans, try adding more than 2.4 and less than 2.6");
-        } catch (WaterException e) {
-            System.out.println("Too little water, try adding than 14.7 cups of water");
-        }
-        try {
-            c.pourCoffee();
-        } catch (StaleCoffeeException e) {
-            System.out.println("Coffee too stale");
-            ;
+            cm.brew(2.4, 15.0);
+            cm.pourCoffee();
+            cm.pourCoffee();
+            cm.setTimeSinceLastBrew(20);
+            cm.pourCoffee();
+            System.out.println("Coffee brewed correctly.");
+            System.out.println(60 - cm.getTimeSinceLastBrew() + " minutes remaining to pour " +
+                    cm.getCupsRemaining() + " cups");
         } catch (Exception e) {
-            System.out.println("No more cups left");
-            ;
+            System.out.println("Exception should not have been caught here");
         }
+
+        try {
+            cm.brew(2.65, 14.0);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            cm.brew(2.3, 14.9);
+        } catch (WaterException e) {
+            System.out.println("WaterException should not have been thrown");
+        } catch (BeansAmountException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            cm.pourCoffee();
+            cm.pourCoffee();
+            cm.setTimeSinceLastBrew(60);
+            cm.pourCoffee();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            cm.brew(2.5, 15);
+            for (int i=0; i<20; i++){
+                cm.pourCoffee();
+            }
+            cm.pourCoffee();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 
