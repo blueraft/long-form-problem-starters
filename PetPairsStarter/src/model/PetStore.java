@@ -3,12 +3,13 @@ package model;
 import model.pets.Pet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class PetStore {
 
 
-
+    private HashMap<String,ArrayList> animals = new HashMap<>();
     //MODIFIES: this
     //EFFECTS: adds p to the petstore
     public void addPet(Pet p){
@@ -18,6 +19,21 @@ public class PetStore {
         }
         pets.add(p);
         animals.put(p.getSpecies(), pets);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PetStore)) return false;
+
+        PetStore petStore = (PetStore) o;
+
+        return animals != null ? animals.equals(petStore.animals) : petStore.animals == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return animals != null ? animals.hashCode() : 0;
     }
 
     //EFFECTS: finds a pet matching this species and color, if it exists in the store

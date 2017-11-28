@@ -8,6 +8,7 @@ public class Pet {
     protected String species;
     protected String color;
     protected double price;
+    protected Human human;
 
     public Pet(String species, String color, boolean friendly, boolean needsAttention, double price){
         this.species = species;
@@ -15,6 +16,7 @@ public class Pet {
         this.friendly = friendly;
         this.needsAttention = needsAttention;
         this.price = price;
+        this.human = null;
     }
 
     public Pet(String species, String color, double price){
@@ -41,7 +43,7 @@ public class Pet {
     }
 
     public Human getHuman() {
-        return null;
+        return human;
     }
 
     //REQUIRES: human != null
@@ -52,6 +54,7 @@ public class Pet {
 
         if (!human.hasPet(this)){
             human.adoptPet(this);
+            this.human = human;
             System.out.println("Success! Adopted " + human);
         }
     }
@@ -63,7 +66,7 @@ public class Pet {
                 ", friendly=" + friendly +
                 ", color='" + color + '\'' +
                 ", price='" + price + '\'' +
-                ", human= " + //TODO 5
+                ", human= " + human + '\'' +
                 '}';
     }
 }

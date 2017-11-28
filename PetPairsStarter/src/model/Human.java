@@ -15,6 +15,7 @@ public class Human {
     public Human(String name) {
         this.name = name;
         this.spendibees = 0;
+        this.pets = new ArrayList<>();
     }
 
     //getters
