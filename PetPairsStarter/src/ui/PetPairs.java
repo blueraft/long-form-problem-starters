@@ -42,6 +42,7 @@ public class PetPairs {
         store.addPet(cat);
 
         System.out.println();
+        store.displayAllPetsWithAttributes(true, false, 50.00);
 
         Pet foundPet = store.findMatchingPet("dog","black");
         if (foundPet != null && sally.canAffordPet(foundPet)) {

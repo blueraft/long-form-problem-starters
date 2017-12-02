@@ -3,8 +3,9 @@ package model;
 import model.pets.Pet;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 
 public class PetStore {
 
@@ -19,6 +20,7 @@ public class PetStore {
         }
         pets.add(p);
         animals.put(p.getSpecies(), pets);
+
     }
 
     @Override
@@ -51,6 +53,24 @@ public class PetStore {
             return pets.get(i);
         }
         return null;
+    }
+
+    //EFFECTS: prints out all pets in the store matching given attributes
+    public void displayAllPetsWithAttributes(boolean friendly, boolean needsAttention, double price) {
+        Collection<ArrayList> allPets = animals.values();
+        for (ArrayList<Pet> petList : allPets){
+            displayOneSpeciesWithAttributes(petList, friendly, needsAttention,price);
+        }
+    }
+
+    //EFFECTS: prints out all pets of this species matching given attributes
+    public void displayOneSpeciesWithAttributes(List<Pet> petList, boolean friendly, boolean needsAttention, double price) {
+        for (Pet p: petList){
+            if(p.isFriendly() == friendly && p.needsAttention() == needsAttention && p.getPrice() <= price) {
+                System.out.println("Has attributes: " + p);
+            }
+        }
+
     }
 
 }
