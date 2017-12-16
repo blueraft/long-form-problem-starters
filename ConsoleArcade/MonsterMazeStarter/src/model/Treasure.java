@@ -1,12 +1,12 @@
 package model;
 
-public class Treasure {
+public class Treasure extends Choice {
 
     private int prize;
     private String optionMessage;
 
     public Treasure(int prize) {
-        this.optionMessage = "Claim your treasure!";
+        super("Claim your treasure!");
         this.prize = prize;
     }
 

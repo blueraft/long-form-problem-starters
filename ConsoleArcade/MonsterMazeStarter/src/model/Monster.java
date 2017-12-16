@@ -1,12 +1,12 @@
 package model;
 
-public class Monster {
+public class Monster extends Choice {
 
     private Treasure treasure;
     private String optionMessage;
 
     public Monster() {
-        this.optionMessage = "Fight a monster.";
+        super( "Fight a monster.");
         treasure = null;
     }
 
